@@ -1,3 +1,5 @@
+console.log("caricato")
+
 class LeTextField extends HTMLElement {
 	
   constructor() {
@@ -6,12 +8,13 @@ class LeTextField extends HTMLElement {
     this.isFormActive = false;
   }
 
-  const visibleShadow = '<span id="${this.getAttribute("id")">${this.innerHTML}</span>';
-  const formShadow = '<form action="" method="">${this.innerHTML}</form>';
-
   connectedCallback() {
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
+
+    const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
+    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="hidden"  name="token" value="'+this.getAttribute("id")+'"><input type="text" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
+
     const shadow = this.attachShadow({mode: 'open'});
     if (!this.isFormActive) {
         shadow.innerHTML = visibleShadow;
@@ -19,8 +22,13 @@ class LeTextField extends HTMLElement {
         shadow.innerHTML = formShadow;
     }
 
-    const pnl = shadow.getElementById(this.getAttribute("id"));
-    this.addEventListener('click', () => alert("Hello!"));
+    const visiblepart = shadow.getElementById(this.getAttribute("id"));
+    visiblepart.addEventListener('click', () => {
+      console.log("cliccato")
+      shadow.innerHTML = formShadow;
+    });
+
+
   }
 
   disconnectedCallback() {
