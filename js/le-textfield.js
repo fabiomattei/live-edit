@@ -3,11 +3,24 @@ class LeTextField extends HTMLElement {
   constructor() {
     super();
     // element created
+    this.isFormActive = false;
   }
+
+  const visibleShadow = '<span id="${this.getAttribute("id")">${this.innerHTML}</span>';
+  const formShadow = '<form action="" method="">${this.innerHTML}</form>';
 
   connectedCallback() {
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
+    const shadow = this.attachShadow({mode: 'open'});
+    if (!this.isFormActive) {
+        shadow.innerHTML = visibleShadow;
+    } else {
+        shadow.innerHTML = formShadow;
+    }
+
+    const pnl = shadow.getElementById(this.getAttribute("id"));
+    this.addEventListener('click', () => alert("Hello!"));
   }
 
   disconnectedCallback() {
@@ -32,3 +45,4 @@ class LeTextField extends HTMLElement {
 
 
 customElements.define("le-textfield", LeTextField);
+
