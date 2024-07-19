@@ -18,7 +18,7 @@ class LeTextField extends HTMLElement {
 
   render() {
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
-    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="hidden"  name="token" value="'+this.getAttribute("id")+'"><input type="text" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
+    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="hidden" id="token"  name="token" value="'+this.getAttribute("id")+'"><input type="text" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
 
     if (!this.isFormActive) {
         this.shadow.innerHTML = visibleShadow;
@@ -33,11 +33,13 @@ class LeTextField extends HTMLElement {
         this.shadow.innerHTML = formShadow;
 
         const formButton = this.shadow.getElementById(this.getAttribute("id")+'bid');
-        console.log(formButton)
         formButton.addEventListener('click', evt => {
           evt.preventDefault()
           evt.stopImmediatePropagation();
           console.log("cliccato bottone")
+
+          const formToken = this.shadow.getElementById('token');
+          const formField = this.shadow.getElementById(this.getAttribute("id")+'fid');
 
           let urlParams = new URLSearchParams(this.getAttribute("parameters"));
           let formattedFormData = new URLSearchParams()
@@ -45,29 +47,32 @@ class LeTextField extends HTMLElement {
             formattedFormData.append(entry[0], entry[1]);
             // console.log(entry[0]+':'+entry[1])
           }
+          formattedFormData.append('value', formField.value);
+          formattedFormData.append('token', formToken.value);
 
+          let urlToCall = this.getAttribute("action")
           const fetchOptions = {}
           if ( this.getAttribute("method") == null || this.getAttribute("method") === 'GET' || this.getAttribute("method") === 'get' || this.getAttribute("method") === 'Get' ) {
             fetchOptions.method = 'GET'
             fetchOptions.headers = { 'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8" }
+            urlToCall += "?" + formattedFormData.toString()
           } else {
             fetchOptions.method = 'POST'
-            fetchOptions.headers = { 'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8" }id
+            fetchOptions.headers = { 'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8" }
             fetchOptions.body = formattedFormData
           }
 
           // fetch Text or HTML
-          fetch(url, fetchOptions)
+          fetch(urlToCall, fetchOptions)
             .then( response => {
+              console.log("response")
               return response.text()
             }).then( htmlcode => {
-
-            let dest = document.querySelector(udiddestination)
-            dest.style.height = dest.offsetHeight
-            dest.style.transition = 'all linear 0.5s'
-
-            dest.replaceChildren()
-            dest.style.height = 0
+              console.log("htmlcode")
+              console.log(htmlcode)
+              this.innerHTML = htmlcode
+              this.isFormActive = false
+              this.render();
 
             }).catch(err => {
               console.warn('Something went wrong in udbuttonempty.', err)
