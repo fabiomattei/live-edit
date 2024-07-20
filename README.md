@@ -4,7 +4,18 @@ Vanilla Javascript library that allows to create in line editing components.
 
 ### How to use it
 
-An example of an HTML body adding the library and adding a le-textfield.
+Add the library at the bottom of your HTML file before closing the body tag.
+
+
+```html
+<body>
+  <h3>Example</h3>
+  <!-- Add the library before closing the body tag -->
+  <script src="js/le-textfield.js"></script>
+</body>
+```
+
+The library will define a new HTML tag named: **le-textfield**
 
 The attributes of the tag are:
 
@@ -18,7 +29,7 @@ The attributes of the tag are:
 ```html
 <body>
   <h3>Text field</h3>
-	<le-textfield id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere">My content goes here</le-textfield>
+  <le-textfield id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere">My content goes here</le-textfield>
   <script src="js/le-textfield.js"></script>
 </body>
 ```
