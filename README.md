@@ -15,13 +15,13 @@ The attributes of the tag are:
 * parameters: parameters added to the call
 * token: eventually added to prevent cross scripting attacks
 
-{% highlight html %}
+```html
 <body>
   <h3>Text field</h3>
 	<le-textfield id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere">My content goes here</le-textfield>
   <script src="js/le-textfield.js"></script>
 </body>
-{% endhighlight %}
+```
 
 
 ### To work on it using PHP integrated server
