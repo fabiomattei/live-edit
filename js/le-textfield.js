@@ -21,7 +21,6 @@ class LeEditable extends HTMLElement {
 
         const visiblepart = this.shadow.getElementById(this.getAttribute("id"));
         visiblepart.addEventListener('click', () => {
-          console.log("cliccato")
           this.isFormActive = true
           this.render();
         });
