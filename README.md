@@ -40,11 +40,11 @@ The optional attributes are:
 
 If we use the new tag to wrap some text it is going to be a normal contant in a HTML page
 
-![Image representing normal html tag](https://github.com/fabiomattei/live-edit/blob/readme/fieldclosed.png?raw=true)
+![Image representing normal html tag](https://github.com/fabiomattei/live-edit/blob/main/blob/readme/fieldclosed.png?raw=true)
 
 If we click on that content a form is going to appear that will allow us to edit that contet.
 
-![Image representing html form](https://github.com/fabiomattei/live-edit/blob/readme/fieldopen.png?raw=true)
+![Image representing html form](https://github.com/fabiomattei/live-edit/blob/main/blob/readme/fieldopen.png?raw=true)
 
 
 ### To work on it using PHP integrated server
