@@ -30,17 +30,32 @@ class LeEditable extends HTMLElement {
           this.shadow.innerHTML = formTextAreaShadow;
         } else if ( this.hasAttribute('type') && this.getAttribute('type') === 'select' ) {
           this.shadow.innerHTML = formSelectShadow;
+          const select = this.shadow.getElementById(this.getAttribute("id") + 'fid');
           if ( this.hasAttribute('data') ) {
             const optionsList = JSON.parse(this.getAttribute('data'));
-            const select = this.shadow.getElementById(this.getAttribute("id") + 'fid');
             for (var i = 0; i < optionsList.length; i++){
               var opt = document.createElement('option');
               opt.value = optionsList[i][0];
               opt.innerHTML = optionsList[i][1];
               select.appendChild(opt);
             }
+          } else if ( this.hasAttribute('dataurl') ) {
+            fetch(this.getAttribute('dataurl'))
+                .then(response => {
+                  return response.text()
+                }).then( htmlcode => {
+              const optionsList = JSON.parse(htmlcode);
+              for (var i = 0; i < optionsList.length; i++){
+                var opt = document.createElement('option');
+                opt.value = optionsList[i][0];
+                opt.innerHTML = optionsList[i][1];
+                select.appendChild(opt);
+              }
+            }).catch(err => {
+              console.warn('Something went wrong: ', err)
+            })
           } else {
-            console.log("no data")
+            console.log("no data attribute set")
           }
         } else {
           this.shadow.innerHTML = formShadow;

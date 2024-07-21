@@ -29,6 +29,8 @@ The optional attributes are:
 * function: the funcion called in order to save the data
 * parameters: parameters added to the call
 * token: eventually added to prevent cross scripting attacks
+* data: data to populate <select> field formata: 
+* dataurl: url where data can be loaded from in order to populate <select> field formata:
 
 ```html
 <body>
