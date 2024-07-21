@@ -18,12 +18,14 @@
   <le-editable id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="number">24</le-editable>
   <h4>Date</h4>
   <le-editable id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="date">2024-07-21</le-editable>
+  <h4>Date time</h4>
+  <le-editable id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="datetime-local">2024-07-21T14:34</le-editable>
   <h4>Color</h4>
   <le-editable id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="color">#456723</le-editable>
   <h4>Select</h4>
-  <le-editable id="myid1" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="select" data='[["E","East"],["W","West"]]'>My content goes here</le-editable>
-  <h4>Select with data url</h4>
-  <le-editable id="myid2" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="select" dataurl="dataurl.php">My content goes here</le-editable>
+  <le-editable id="myid1" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="select" data='[["E","East"],["W","West"]]'>W</le-editable>
+  <h4>Select with data coming from an API</h4>
+  <le-editable id="myid2" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere" type="select" dataurl="dataurl.php">E</le-editable>
   <script src="js/le-textfield.js"></script>
 </body>
 </html>

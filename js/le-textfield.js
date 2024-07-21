@@ -36,6 +36,7 @@ class LeEditable extends HTMLElement {
               var opt = document.createElement('option');
               opt.value = optionsList[i][0];
               opt.innerHTML = optionsList[i][1];
+              if (select.value === opt.value) { opt.selected = true }
               select.appendChild(opt);
             }
           } else if ( this.hasAttribute('dataurl') ) {
@@ -48,6 +49,7 @@ class LeEditable extends HTMLElement {
                 var opt = document.createElement('option');
                 opt.value = optionsList[i][0];
                 opt.innerHTML = optionsList[i][1];
+                if (select.value === opt.value) { opt.selected = true }
                 select.appendChild(opt);
               }
             }).catch(err => {
