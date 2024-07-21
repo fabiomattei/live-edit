@@ -14,6 +14,7 @@ class LeEditable extends HTMLElement {
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
     const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
     const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname">'+this.innerHTML+'</textarea><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
+    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"></select><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
 
     if (!this.isFormActive) {
         this.shadow.innerHTML = visibleShadow;
@@ -27,6 +28,20 @@ class LeEditable extends HTMLElement {
     } else {
         if ( this.hasAttribute('type') && this.getAttribute('type') === 'textarea' ) {
           this.shadow.innerHTML = formTextAreaShadow;
+        } else if ( this.hasAttribute('type') && this.getAttribute('type') === 'select' ) {
+          this.shadow.innerHTML = formSelectShadow;
+          if ( this.hasAttribute('data') ) {
+            const optionsList = JSON.parse(this.getAttribute('data'));
+            const select = this.shadow.getElementById(this.getAttribute("id") + 'fid');
+            for (var i = 0; i < optionsList.length; i++){
+              var opt = document.createElement('option');
+              opt.value = optionsList[i][0];
+              opt.innerHTML = optionsList[i][1];
+              select.appendChild(opt);
+            }
+          } else {
+            console.log("no data")
+          }
         } else {
           this.shadow.innerHTML = formShadow;
         }
