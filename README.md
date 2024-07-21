@@ -25,6 +25,7 @@ The required attributes of the tag are:
 
 The optional attributes are:
 
+* type: default text but it can be: button, checkbox, color, date, datetime-local, email, file, image, month, number, password, radio, range, reset, search, tel, time, url, week
 * function: the funcion called in order to save the data
 * parameters: parameters added to the call
 * token: eventually added to prevent cross scripting attacks

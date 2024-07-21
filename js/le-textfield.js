@@ -1,6 +1,5 @@
-console.log("caricato")
 
-class LeTextField extends HTMLElement {
+class LeEditable extends HTMLElement {
 
   connectedCallback() {
     this.isFormActive = false;
@@ -13,7 +12,7 @@ class LeTextField extends HTMLElement {
 
   render() {
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
-    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="text" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
+    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
 
     if (!this.isFormActive) {
         this.shadow.innerHTML = visibleShadow;
@@ -82,4 +81,4 @@ class LeTextField extends HTMLElement {
 }
 
 
-customElements.define("le-textfield", LeTextField);
+customElements.define("le-editable", LeEditable);
