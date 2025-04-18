@@ -2,6 +2,11 @@
  
 Vanilla Javascript library that allows to create in line editing components.
 
+# Features
+
+* Primarily driven by markup on the page
+* Framework independent
+
 ### How to use it
 
 Add the library at the bottom of your HTML file before closing the body tag.
@@ -26,7 +31,7 @@ The required attributes of the tag are:
 The optional attributes are:
 
 * type: default text but it can be: button, checkbox, color, date, datetime-local, email, file, image, month, number, password, radio, range, reset, search, tel, time, url, week
-* function: the funcion called in order to save the data
+* function: the function called in order to save the data
 * parameters: parameters added to the call
 * token: eventually added to prevent cross scripting attacks
 * data: data to populate <select> field formata: 
@@ -41,11 +46,11 @@ The optional attributes are:
 </body>
 ```
 
-If we use the new tag to wrap some text it is going to be a normal contant in a HTML page
+If we use the new tag to wrap some text it is going to be a normal content in a HTML page
 
 ![Image representing normal html tag](https://github.com/fabiomattei/live-edit/blob/main/blob/readme/fieldclosed.png?raw=true)
 
-If we click on that content a form is going to appear that will allow us to edit that contet.
+If we click on that content a form is going to appear that will allow us to edit that content.
 
 ![Image representing html form](https://github.com/fabiomattei/live-edit/blob/main/blob/readme/fieldopen.png?raw=true)
 
