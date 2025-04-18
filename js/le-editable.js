@@ -13,7 +13,7 @@ class LeEditable extends HTMLElement {
   render() {
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
     const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
-    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname">'+this.innerHTML+'</textarea><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
+    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname">'+this.innerHTML+'</textarea><br/><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
     const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"></select><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
 
     if (!this.isFormActive) {
@@ -87,7 +87,7 @@ class LeEditable extends HTMLElement {
     }
     formattedFormData.append('value', formField.value);
     if (this.hasAttribute('function')) { formattedFormData.append('function', this.getAttribute('function' ) ) }
-    if (this.hasAttribute('token')) { formattedFormData.append('token', this.getAttribute('token' ) ) }
+    if (this.hasAttribute('csrftoken')) { formattedFormData.append('csrftoken', this.getAttribute('csrftoken' ) ) }
 
     let urlToCall = this.getAttribute("action")
     const fetchOptions = {}

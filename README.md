@@ -40,7 +40,7 @@ The optional attributes are:
 ```html
 <body>
   <h3>Text field</h3>
-  <le-textfield id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" token="mytokenhere">My content goes here</le-textfield>
+  <le-textfield id="myid" action="internalapi.php" method="GET" function="renewthing" parameters="par1=1&par2=accent" csrftoken="mytokenhere">My content goes here</le-textfield>
   <!-- Add the library before closing the body tag -->
   <script src="js/le-textfield.js"></script>
 </body>
@@ -58,5 +58,10 @@ If we click on that content a form is going to appear that will allow us to edit
 ### To work on it using PHP integrated server
 
 php -S localhost:8080
+
+### USAGES
+
+If you run a webserver and point your browser to index.html you can see a number of examples.
+
 
 
