@@ -16,14 +16,14 @@ class LeEditable extends HTMLElement {
     const oktext = ( this.hasAttribute("oktext") ? this.getAttribute("oktext") : 'Ok' )
     const okbutton = '<button id="'+this.getAttribute("id")+'bid" '+okclass+'>'+oktext+'</button>'
     
-    const cancellclass = ( this.hasAttribute("cancellclass") ? 'okclass="'+this.getAttribute("cancellclass")+'"' : '' )
-    const cancelltext = ( this.hasAttribute("cancelltext") ? this.getAttribute("cancelltext") : 'Cancell' )
-    const cancellbutton = ( this.hasAttribute("cancellbutton") ? '<button id="'+this.getAttribute("id")+'cid" '+cancellclass+'>'+cancelltext+'</button>' : '' ) 
+    const cancelclass = ( this.hasAttribute("cancelclass") ? 'okclass="'+this.getAttribute("cancelclass")+'"' : '' )
+    const canceltext = ( this.hasAttribute("canceltext") ? this.getAttribute("canceltext") : 'cancel' )
+    const cancelbutton = ( this.hasAttribute("cancelbutton") ? '<button id="'+this.getAttribute("id")+'cid" '+cancelclass+'>'+canceltext+'</button>' : '' ) 
     
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
-    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+okbutton+cancellbutton+'</form>';
-    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+this.innerHTML+'</textarea><br/>'+okbutton+cancellbutton+'</form>';
-    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'"></select>'+okbutton+cancellbutton+'</form>';
+    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+okbutton+cancelbutton+'</form>';
+    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+this.innerHTML+'</textarea><br/>'+okbutton+cancelbutton+'</form>';
+    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'"></select>'+okbutton+cancelbutton+'</form>';
 
     if (!this.isFormActive) {
         this.shadow.innerHTML = visibleShadow;
@@ -83,7 +83,7 @@ class LeEditable extends HTMLElement {
           this.render();
         });
         
-        if (this.hasAttribute("cancellbutton")) {
+        if (this.hasAttribute("cancelbutton")) {
           const formCancelButton = this.shadow.getElementById(this.getAttribute("id")+'cid');
           formCancelButton.addEventListener('click', evt => {
             evt.preventDefault()
