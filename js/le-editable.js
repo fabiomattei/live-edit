@@ -3,7 +3,7 @@ class LeEditable extends HTMLElement {
 
   connectedCallback() {
     this.isFormActive = false
-    // this.initialContent = this.innerHTML
+    this.initialContent = this.innerHTML
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
     this.shadow = this.attachShadow({mode: 'open'})
@@ -89,7 +89,7 @@ class LeEditable extends HTMLElement {
             evt.preventDefault()
             evt.stopImmediatePropagation();
           
-            //this.innerHTML = this.initialContent 
+            this.innerHTML = this.initialContent 
           
             this.isFormActive = false
             this.render();
