@@ -2,19 +2,28 @@
 class LeEditable extends HTMLElement {
 
   connectedCallback() {
-    this.isFormActive = false;
+    this.isFormActive = false
+    // this.initialContent = this.innerHTML
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
-    this.shadow = this.attachShadow({mode: 'open'});
+    this.shadow = this.attachShadow({mode: 'open'})
 
-    this.render();
+    this.render()
   }
 
   render() {
+    const okclass = ( this.hasAttribute("okclass") ? 'okclass="'+this.getAttribute("okclass")+'"' : '' )
+    const oktext = ( this.hasAttribute("oktext") ? this.getAttribute("oktext") : 'Ok' )
+    const okbutton = '<button id="'+this.getAttribute("id")+'bid" '+okclass+'>'+oktext+'</button>'
+    
+    const cancellclass = ( this.hasAttribute("cancellclass") ? 'okclass="'+this.getAttribute("cancellclass")+'"' : '' )
+    const cancelltext = ( this.hasAttribute("cancelltext") ? this.getAttribute("cancelltext") : 'Cancell' )
+    const cancellbutton = ( this.hasAttribute("cancellbutton") ? '<button id="'+this.getAttribute("id")+'cid" '+cancellclass+'>'+cancelltext+'</button>' : '' ) 
+    
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
-    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
-    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname">'+this.innerHTML+'</textarea><br/><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
-    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"></select><button id="'+this.getAttribute("id")+'bid">Ok</button></form>';
+    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'">'+okbutton+cancellbutton+'</form>';
+    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname">'+this.innerHTML+'</textarea><br/>'+okbutton+cancellbutton+'</form>';
+    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"></select>'+okbutton+cancellbutton+'</form>';
 
     if (!this.isFormActive) {
         this.shadow.innerHTML = visibleShadow;
@@ -63,8 +72,8 @@ class LeEditable extends HTMLElement {
         }
 
 
-        const formButton = this.shadow.getElementById(this.getAttribute("id")+'bid');
-        formButton.addEventListener('click', evt => {
+        const formOkButton = this.shadow.getElementById(this.getAttribute("id")+'bid');
+        formOkButton.addEventListener('click', evt => {
           evt.preventDefault()
           evt.stopImmediatePropagation();
 
@@ -73,6 +82,19 @@ class LeEditable extends HTMLElement {
           this.isFormActive = false
           this.render();
         });
+        
+        if (this.hasAttribute("cancellbutton")) {
+          const formCancelButton = this.shadow.getElementById(this.getAttribute("id")+'cid');
+          formCancelButton.addEventListener('click', evt => {
+            evt.preventDefault()
+            evt.stopImmediatePropagation();
+          
+            //this.innerHTML = this.initialContent 
+          
+            this.isFormActive = false
+            this.render();
+          });
+        }
     }
   }
 

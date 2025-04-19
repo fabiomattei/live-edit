@@ -61,7 +61,7 @@ php -S localhost:8080
 
 ### USAGES
 
-If you run a webserver and point your browser to index.html you can see a number of examples.
+If you run a web-server and point your browser to index.html you can see a number of examples.
 
 
 
