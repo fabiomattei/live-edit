@@ -11,6 +11,84 @@ class LeEditable extends HTMLElement {
     this.render()
   }
 
+  /**
+   * Transforms a date from this format: 2025-04-19
+   * to a date in this format: 19/04/2025
+   *
+   * Remember
+   * match[3],  // year
+   * match[2],  // monthIndex
+   * match[1]  // day
+   *
+   * @param myDate
+   * @returns {string}
+   */
+  formatDateFromISOToEuropean(myDate) {
+    let dateParser = /(\d{2})\/(\d{2})\/(\d{4})/;
+    let match = myDate.match(dateParser);
+    return String(match[3]).padStart(2,"0")+'-'+String(match[2]).padStart(2,"0")+'-'+match[1];
+  }
+
+  /**
+   * Transforms a date from this format: 19/04/2025
+   * to a date in this format: 2025-04-19
+   *
+   * Remember
+   * match[3],  // year
+   * match[2],  // monthIndex
+   * match[1]  // day
+   *
+   * @param myDate
+   * @returns {string}
+   */
+  formatDateFromEuropeanToIso(myDate) {
+    let dateParser = /(\d{4})-(\d{2})-(\d{2})/;
+    let match = myDate.match(dateParser);
+    return match[3]+'/'+String(match[2]).padStart(2,"0")+'/'+String(match[1]).padStart(2,"0");
+  }
+
+  /**
+   * Transforms a date from this format: 2025-04-19 12:30:40
+   * to a date in this format: 19/04/2025T12:30:40
+   *
+   * Remember
+   * match[3], // year
+   * match[2], // monthIndex
+   * match[1]  // day
+   * match[4], // hours
+   * match[5], // minutes
+   * match[6]  //seconds
+   *
+   * @param myDate
+   * @returns {string}
+   */
+  formatDateTimeFromISOToEuropean(myDate) {
+    let dateParser = /(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/;
+    let match = myDate.match(dateParser);
+    return match[3]+'-'+String(match[2]).padStart(2,"0")+'-'+String(match[1]).padStart(2,"0")+'T'+String(match[4]).padStart(2,"0")+':'+String(match[5]).padStart(2,"0");
+  }
+
+  /**
+   * Transforms a date from this format: 19/04/2025T12:30:40
+   * to a date in this format: 2025-04-19 12:30:40
+   *
+   * Remember
+   * match[3], // year
+   * match[2], // monthIndex
+   * match[1]  // day
+   * match[4], // hours
+   * match[5], // minutes
+   * match[6]  //seconds
+   *
+   * @param myDate
+   * @returns {string}
+   */
+  formatDateTimeFromISOToEuropean(myDate) {
+    let dateParser = /(\d{2})\/(\d{2})\/(\d{4})T(\d{2}):(\d{2}):(\d{2})/;
+    let match = myDate.match(dateParser);
+    return match[3]+'-'+String(match[2]).padStart(2,"0")+'-'+String(match[1]).padStart(2,"0")+' '+String(match[4]).padStart(2,"0")+':'+String(match[5]).padStart(2,"0");
+  }
+
   render() {
     const okclass = ( this.hasAttribute("okclass") ? 'okclass="'+this.getAttribute("okclass")+'"' : '' )
     const oktext = ( this.hasAttribute("oktext") ? this.getAttribute("oktext") : 'Ok' )
@@ -67,6 +145,10 @@ class LeEditable extends HTMLElement {
           } else {
             console.log("no data attribute set")
           }
+        } else if ( this.hasAttribute('type') && this.getAttribute('type') === 'date' ) { 
+          const formDateShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.formatDateFromISOToEuropean(this.innerHTML)+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+okbutton+cancelbutton+'</form>';
+          
+          this.shadow.innerHTML = formDateShadow;
         } else {
           this.shadow.innerHTML = formShadow;
         }
@@ -125,16 +207,23 @@ class LeEditable extends HTMLElement {
 
     // fetch Text or HTML
     fetch(urlToCall, fetchOptions)
-        .then(response => {
+      .then(response => {
           return response.text()
-        }).then(htmlcode => {
-      this.innerHTML = htmlcode
-      this.isFormActive = false
-      this.render();
+      }).then(htmlcode => {
+        
+        if ( this.hasAttribute('type') && this.getAttribute('type') === 'date' ) {
+          let k = this.formatDateFromEuropeanToIso(String(htmlcode))
+          this.innerHTML = this.formatDateFromEuropeanToIso(htmlcode)
+        } else {
+          this.innerHTML = htmlcode
+        }
+        
+        this.isFormActive = false
+        this.render();
 
-    }).catch(err => {
-      console.warn('Something went wrong: ', err)
-    })
+      }).catch(err => {
+        console.warn('Something went wrong: ', err)
+      })
   }
 
 }

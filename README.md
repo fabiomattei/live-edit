@@ -97,5 +97,6 @@ You want to make a paragraph editable in a text area and call the API using a PO
 You want to make a data editable in a date field and call the API using a POST call attaching as parameters the date row id in the database:
 
 ```html
-  <le-editable id="mydate" action="internalapi.php" method="POST" parameters="contentid=27" type="date">2024-07-21</le-editable>
+  <le-editable id="mydate" action="internalapi.php" method="POST" parameters="contentid=27" type="date">19-04-2025</le-editable>
 ```
+The date is in European format.
