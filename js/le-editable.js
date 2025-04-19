@@ -21,9 +21,9 @@ class LeEditable extends HTMLElement {
     const cancellbutton = ( this.hasAttribute("cancellbutton") ? '<button id="'+this.getAttribute("id")+'cid" '+cancellclass+'>'+cancelltext+'</button>' : '' ) 
     
     const visibleShadow = '<span id="'+this.getAttribute("id")+'">'+this.innerHTML+'</span>';
-    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'">'+okbutton+cancellbutton+'</form>';
-    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname">'+this.innerHTML+'</textarea><br/>'+okbutton+cancellbutton+'</form>';
-    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'"></select>'+okbutton+cancellbutton+'</form>';
+    const formShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><input type="'+(this.getAttribute("type") ?? 'text' )+'" id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+okbutton+cancellbutton+'</form>';
+    const formTextAreaShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><textarea id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" class="'+(this.getAttribute("fieldclass") ?? '' )+'">'+this.innerHTML+'</textarea><br/>'+okbutton+cancellbutton+'</form>';
+    const formSelectShadow = '<form action="'+this.getAttribute("action")+'" method="'+this.getAttribute("method")+'" class="'+(this.getAttribute("formclass") ?? '' )+'"><select id="'+this.getAttribute("id")+'fid" name="'+this.getAttribute("id")+'fname" value="'+this.innerHTML+'" class="'+(this.getAttribute("fieldclass") ?? '' )+'"></select>'+okbutton+cancellbutton+'</form>';
 
     if (!this.isFormActive) {
         this.shadow.innerHTML = visibleShadow;

@@ -33,9 +33,16 @@ The optional attributes are:
 * type: default text but it can be: button, checkbox, color, date, datetime-local, email, file, image, month, number, password, radio, range, reset, search, tel, time, url, week
 * function: the function called in order to save the data
 * parameters: parameters added to the call
-* token: eventually added to prevent cross scripting attacks
+* csrftoken: eventually added to prevent cross scripting attacks
 * data: data to populate <select> field formata: 
 * dataurl: url where data can be loaded from in order to populate <select> field formata:
+
+Optional attributes that allow to personalize the look of the form:
+
+* formclass: css class applied to form tag
+* fieldclass: css class applied to field tag
+* okclass:  css class applied to ok button
+* cancelclass: css class applied to cancel button (if present)
 
 ```html
 <body>
