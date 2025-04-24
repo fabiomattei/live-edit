@@ -111,7 +111,7 @@ class LeEditable extends HTMLElement {
     const oktext = ( this.hasAttribute("oktext") ? this.getAttribute("oktext") : 'Ok' )
     const okbutton = '<button id="'+this.getAttribute("id")+'bid" '+okclass+'>'+oktext+'</button>'
     
-    const cancelclass = ( this.hasAttribute("cancelclass") ? 'okclass="'+this.getAttribute("cancelclass")+'"' : '' )
+    const cancelclass = ( this.hasAttribute("cancelclass") ? 'cancelclass="'+this.getAttribute("cancelclass")+'"' : '' )
     const canceltext = ( this.hasAttribute("canceltext") ? this.getAttribute("canceltext") : 'cancel' )
     const cancelbutton = ( this.hasAttribute("cancelbutton") ? '<button id="'+this.getAttribute("id")+'cid" '+cancelclass+'>'+canceltext+'</button>' : '' ) 
     
